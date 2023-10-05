@@ -11,14 +11,59 @@
         padding: 0;
     }
 
+    ::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
     body {
-        height: 100vh;
-        width: 100vw;
+        width: 97vw;
+        height: 97vh;
         background: black url('imagens/minhatela-home.jpeg') no-repeat top center;
         background-size: cover;
     }
+
+    h1 {
+        font-family: Helvetica, sans-serif;
+        margin-top: 15px;
+        margin-left: 15px;
+        color: white;
+        font-weight: normal;
+        backdrop-filter: blur(5px);
+    }
+    h2 {
+        font-family: Helvetica, sans-serif;
+        margin-left: 17px;
+        color: white;
+        font-weight: normal;
+        font-size: 10px;
+        backdrop-filter: blur(3px);
+    }
 </style>
 <body>
-    
+    <h1 id="relogio">00:00</h1>
+    <h2 id="data">Qui, 05 de Outubro</h2>
+
+    <script>
+        let diaNome = new Array ("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab");
+        let mesNome = new Array ("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+        setInterval(function() {
+            let novaHora = new Date();
+            let dia = novaHora.getDay();
+            let hora = novaHora.getHours();
+            let minuto = novaHora.getMinutes();
+            dia = zero(dia);
+            hora = zero(hora);
+            minuto = zero(minuto);
+            document.getElementById('relogio').textContent = hora + ':' + minuto;
+            document.getElementById('data').textContent = diaNome[novaHora.getDay()] + ", " + dia + " de " + mesNome[novaHora.getMonth()];
+        }, 1000);
+
+        function zero(x) {
+            if (x < 10) {
+                x = '0' + x;
+            } return x;
+        }
+    </script>
 </body>
 </html>
